@@ -34,6 +34,10 @@ public class Member extends BaseTimeEntity {
     @ColumnDefault("0")
     private Long reportCount;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "member_role")
+    private MemberRole memberRole;
+
     @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Post> posts=new ArrayList<>();
 
