@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: innertalk
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/innertalk
+    username: crane
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+
+
+
+server:
+  port: 8081
+
+logging:
+  level:
+    org.hibernate.sql: debug
