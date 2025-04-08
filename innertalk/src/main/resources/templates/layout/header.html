@@ -1,0 +1,31 @@
+<!-- templates/layout/header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<!-- fragment 선언 부분 -->
+<div th:fragment="headerFragment">
+    <header class="bg-primary text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- 왼쪽: 로고/사이트명 -->
+            <a th:href="@{/innertalk/home}" class="h4 m-0" style="text-decoration: none; color: inherit;">
+                🕊️ 속마음
+            </a>
+
+                <div th:if="${memberDto!=null}">
+                    <div th:if="${memberDto.nickname!=null}">
+                        <span class="text-white fw-bold fs-5" th:text="${memberDto.nickname}"></span>
+                        <button class="btn btn-info ms-2" th:onclick="|location.href='@{/innertalk/mypage}'|">마이페이지</button>
+                        <button class="btn btn-warning ms-2" th:onclick="|location.href='@{/innertalk/logout}'|">로그아웃</button>
+                    </div>
+                    <div th:if="${memberDto.nickname==null}">
+                        <button class="btn btn-info ms-2" th:onclick="|location.href='@{/innertalk/login}'|">로그인</button>
+                    </div>
+                </div>
+
+        </div>
+    </header>
+</div>
+
+</body>
+</html>

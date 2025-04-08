@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
+
+
+    <title>속마음</title>
+</head>
+
+<body>
+
+<!--header 부분-->
+<div th:replace="~{layout/header :: headerFragment}"></div>
+
+<main>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="text-primary mb-0">안녕하세요, Bootstrap!</h1>
+            <button class="btn btn-success">버튼 예시</button>
+        </div>
+    </div>
+</main>
+
+<!--footer 부분-->
+<div th:replace="~{layout/footer :: footerFragment}"></div>
+
+<!-- Bootstrap JS (모달, 드롭다운 등 동작에 필요) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.min.js" integrity="sha384-VQqxDN0EQCkWoxt/0vsQvZswzTHUVOImccYmSyhJTp7kGtPed0Qcx8rK9h9YEgx+" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

@@ -2,6 +2,7 @@ package talk.innertalk.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -30,10 +31,6 @@ public class Member extends BaseTimeEntity {
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
-    @Column(name = "report_count")
-    @ColumnDefault("0")
-    private Long reportCount;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "member_role")
     private MemberRole memberRole;
@@ -43,5 +40,14 @@ public class Member extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<BookMark> bookmarks=new ArrayList<>();
+
+
+    @Builder
+    public Member(String email, String password, String nickname,MemberRole memberRole) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.memberRole = memberRole;
+    }
 
 }
