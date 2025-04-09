@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import talk.innertalk.domain.Member;
 import talk.innertalk.dto.HomeMemberDto;
+import talk.innertalk.dto.PostListDto;
 import talk.innertalk.service.CustomUserDetail;
 import talk.innertalk.service.MemberService;
+import talk.innertalk.service.PostService;
+
+import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -22,6 +26,7 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 public class HomeController {
 
     private final MemberService memberService;
+    private final PostService postService;
 
     @GetMapping({"", "/"})
     public String redirectToHome() {
@@ -31,6 +36,33 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model) {
 
+        HomeMemberDto memberDto = getHomeMemberDto();
+
+        List<PostListDto> postListDtos = getPostListDtos();
+
+
+        model.addAttribute("postListDtos", postListDtos);
+        model.addAttribute("memberDto", memberDto);
+
+
+
+        return "home";
+    }
+
+
+
+    /**
+     *PostListDtos 조회
+     */
+    private List<PostListDto> getPostListDtos() {
+        List<PostListDto> postListDtos = postService.findPageAll();
+        return postListDtos;
+    }
+
+    /**
+     * HomeMemberDto 조회
+     */
+    private HomeMemberDto getHomeMemberDto() {
         Member loginMember = memberService.getLoginMember();
 
         HomeMemberDto memberDto;
@@ -42,12 +74,7 @@ public class HomeController {
         else {
             memberDto=new HomeMemberDto();
         }
-
-        model.addAttribute("memberDto", memberDto);
-
-
-
-        return "home";
+        return memberDto;
     }
 
 

@@ -36,7 +36,8 @@
                 <button type="submit" class="btn btn-primary">로그인</button>
             </form>
 
-            <button type="button" class="btn btn-secondary mt-3" onclick="location.href='/signup'">회원가입</button>
+            <button type="button" class="btn btn-secondary mt-3"
+                    th:onclick="|location.href='@{/innertalk/signup}'|">회원가입</button>
         </div>
     </div>
 </section>

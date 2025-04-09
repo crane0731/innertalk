@@ -2,6 +2,7 @@ package talk.innertalk.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -37,19 +38,27 @@ public class Post extends BaseAuditingEntity {
 
     @Column(name = "comment_count", nullable = false)
     @ColumnDefault("0")
-    private Long commentCount;
+    private Long commentCount=0L;
 
     @Column(name = "vote_count", nullable = false)
     @ColumnDefault("0")
-    private Long voteCount;
+    private Long voteCount=0L;
 
     @Column(name = "report_count", nullable = false)
     @ColumnDefault("0")
-    private Long reportCount;
+    private Long reportCount=0L;
 
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> comments=new ArrayList<>();
 
+    @Builder
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 
 
+    protected void setMember(Member member) {
+        this.member = member;
+    }
 }

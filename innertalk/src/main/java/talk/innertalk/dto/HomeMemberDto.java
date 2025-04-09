@@ -7,6 +7,9 @@ import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 import talk.innertalk.domain.Member;
 
+/**
+ * Home 페이지에 뿌릴 Member 정보를 담은 DTO
+ */
 @Getter
 @Setter
 public class HomeMemberDto {

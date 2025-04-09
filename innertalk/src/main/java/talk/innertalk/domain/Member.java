@@ -38,7 +38,7 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Post> posts=new ArrayList<>();
 
-    @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookMark> bookmarks=new ArrayList<>();
 
 
@@ -48,6 +48,16 @@ public class Member extends BaseTimeEntity {
         this.password = password;
         this.nickname = nickname;
         this.memberRole = memberRole;
+    }
+
+
+    /**
+     * 연관관계 편의 메서드
+     * @param post
+     */
+    public void addPost(Post post) {
+        posts.add(post);
+        post.setMember(this);
     }
 
 }

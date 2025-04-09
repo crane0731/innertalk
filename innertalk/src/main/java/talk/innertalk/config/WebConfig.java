@@ -27,7 +27,7 @@ public class WebConfig {
                 .formLogin((auth)->auth
                         .loginPage("/innertalk/login")
                         .loginProcessingUrl("/innertalk/login-processing")
-                        .failureUrl("/innertalk/home")
+                        .failureUrl("/innertalk/login")
                         .defaultSuccessUrl("/innertalk/home")
                         .usernameParameter("email")
                         .passwordParameter("password")
