@@ -52,12 +52,14 @@ public class Member extends BaseTimeEntity {
 
 
     /**
-     * 연관관계 편의 메서드
+     * 연관관계 편의 메서드 : 추가
      * @param post
      */
     public void addPost(Post post) {
         posts.add(post);
         post.setMember(this);
     }
+
+
 
 }

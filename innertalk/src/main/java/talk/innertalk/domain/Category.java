@@ -2,6 +2,7 @@ package talk.innertalk.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import talk.innertalk.domain.baseentity.BaseTimeEntity;
@@ -20,4 +21,8 @@ public class Category extends BaseTimeEntity {
     @Column(name = "name")
     private String name;
 
+    @Builder
+    public Category(String name) {
+        this.name = name;
+    }
 }

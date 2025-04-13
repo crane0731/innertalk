@@ -52,13 +52,40 @@ public class Post extends BaseAuditingEntity {
     private List<Comment> comments=new ArrayList<>();
 
     @Builder
-    public Post(String title, String content) {
+    public Post(String title, String content, Category category) {
         this.title = title;
         this.content = content;
+        this.category = category;
     }
 
 
     protected void setMember(Member member) {
         this.member = member;
     }
+
+
+    /**
+     * 연관관계 편의 메서드 : 댓글 추가
+     */
+    public void addComment(Comment comment) {
+        addCommentCount();
+        comments.add(comment);
+        comment.setPost(this);
+    }
+
+    /**
+     * 연관관계 편의 메서드 : 댓글 제거
+     */
+    public void delComment(Comment comment) {
+        comments.remove(comment);
+        comment.setPost(null);
+    }
+
+    /**
+     * 댓글 수 증가
+     */
+    private void addCommentCount(){
+        commentCount++;
+    }
+
 }

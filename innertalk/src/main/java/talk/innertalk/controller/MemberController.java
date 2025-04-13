@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import talk.innertalk.domain.Member;
 import talk.innertalk.dto.MemberInfoResponseDto;
+import talk.innertalk.dto.PostListDto;
 import talk.innertalk.service.MemberService;
 import talk.innertalk.service.PostService;
+
+import java.util.List;
 
 @Controller
 @Slf4j

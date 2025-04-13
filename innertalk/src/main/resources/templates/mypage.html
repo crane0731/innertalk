@@ -45,7 +45,7 @@
                                 <h5 th:text="${post.title}">게시글 제목</h5>
                                 <p th:text="'작성일 : ' + ${post.createdDate}"></p>
                                 <!-- 클릭 시 상세 페이지 이동 (예시) -->
-                                <form th:action="@{innertalk/posts/{id}(id=${post.id})}" method="get">
+                                <form th:action="@{/innertalk/posts/{id}(id=${post.id})}" method="get">
                                     <button class="btn btn-sm btn-primary" type="submit">보기</button>
                                 </form>
                             </div>
@@ -66,7 +66,7 @@
                                 <h5 th:text="${bookmark.postTitle}">게시글 제목</h5>
                                 <p th:text="'작성일 : ' + ${bookmark.postCreatedDate}"></p>
                                 <!-- 클릭 시 상세 페이지 이동 (예시) -->
-                                <form th:action="@{innertalk/bookmark/{id}(id=${bookmark.id})}" method="get">
+                                <form th:action="@{/innertalk/posts/{id}(id=${post.id})}" method="get">
                                     <button class="btn btn-sm btn-primary" type="submit">보기</button>
                                 </form>
                             </div>

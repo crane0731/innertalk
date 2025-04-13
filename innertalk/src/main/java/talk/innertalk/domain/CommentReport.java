@@ -34,6 +34,4 @@ public class CommentReport extends BaseAuditingEntity {
     private ReportStatus reportStatus;
 
 
-
-
 }

@@ -25,6 +25,12 @@
             flex: 1;
             height: 100vh;
         }
+
+        .scrollable-card-body {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
     </style>
 
 
@@ -37,25 +43,39 @@
 <div th:replace="~{layout/header :: headerFragment}"></div>
 
 <main>
-    <section class="h-100 d-flex justify-content-start align-items-center">
-        <div class="card bg-dark text-white" style="border-radius: 1rem;">
-            <div class="card-body p-5 text-center">
+    <form class="d-flex justify-content-center mt-5 ms-5" method="get" th:action="@{/innertalk}">
+        <button class="btn btn-light me-3" type="button" th:onclick="|location.href='@{/innertalk/write}'|">글쓰기</button>
+
+        <select class="form-select w-auto ms-3" name="sort"
+                style="background-color: transparent; color: black; border: 1px solid white;">
+            <option value="" disabled selected>정렬 기준</option>
+            <option value="latest">최신순</option>
+            <option value="oldest">오래된순</option>
+            <option value="popular">공감순</option>
+        </select>
+
+
+        <button class="btn btn-light" type="submit">검색</button>
+    </form>
+
+    <section class="h-100 d-flex justify-content-start align-items-center mb-5 ms-5 me-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem; width: 100%;">
+            <div class="card-body p-5 text-center scrollable-card-body">
                 <h2>전체 게시글</h2>
                 <!-- 게시글 목록 반복 -->
                 <div th:each="post : ${postListDtos}" class="card my-2 bg-light text-dark">
                     <div class="card-body">
                         <h5 th:text="${post.title}">게시글 제목</h5>
                         <p th:text="'작성일 : ' + ${post.createdDate}"></p>
-                        <!-- 클릭 시 상세 페이지 이동 (예시) -->
-                        <form th:action="@{innertalk/posts/{id}(id=${post.id})}" method="get">
+                        <form th:action="@{/innertalk/posts/{id}(id=${post.id})}" method="get">
                             <button class="btn btn-sm btn-primary" type="submit">보기</button>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
+
 </main>
 
 <!--footer 부분-->
