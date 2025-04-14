@@ -8,7 +8,13 @@ import lombok.NoArgsConstructor;
 import talk.innertalk.domain.baseentity.BaseTimeEntity;
 
 @Entity
-@Table(name = "bookmark")
+@Table(
+        name = "bookmark",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"member_id", "post_id"})
+        }
+)
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BookMark extends BaseTimeEntity {

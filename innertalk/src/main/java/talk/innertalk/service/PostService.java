@@ -44,6 +44,14 @@ public class PostService {
         return postRepository.findById(id).orElseThrow(()->new CustomException(ErrorMessages.NO_SUCH_POST));
     }
 
+    //게시글을 조회하고 조회수를 증가시킴
+    @Transactional
+    public Post findPostAndAddViewCount(Long id){
+        Post post = postRepository.findById(id).orElseThrow(() -> new CustomException(ErrorMessages.NO_SUCH_POST));
+        post.addViewCount();
+        return post;
+    }
+
     public List<PostListDto> findAll(){
         return postRepository.findAll().stream().map(PostListDto::createDto).toList();
     }

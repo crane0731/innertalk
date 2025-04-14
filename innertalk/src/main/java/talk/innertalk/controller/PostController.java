@@ -11,6 +11,7 @@ import talk.innertalk.dto.AddCommentDto;
 import talk.innertalk.dto.AddPostDto;
 import talk.innertalk.dto.LoginMemberIdDto;
 import talk.innertalk.dto.PostInfoDto;
+import talk.innertalk.repository.BookMarkRepository;
 import talk.innertalk.service.MemberService;
 import talk.innertalk.service.PostService;
 
@@ -22,13 +23,14 @@ public class PostController {
 
     private final MemberService memberService;
     private final PostService postService;
+    private final BookMarkRepository bookMarkRepository;
 
     /**
      * 게시글 보기
      */
     @GetMapping("/posts/{id}")
     public String postPage(@PathVariable("id")Long id, Model model) {
-        Post post = postService.findPostById(id);
+        Post post = postService.findPostAndAddViewCount(id);
         PostInfoDto postInfoDto = PostInfoDto.createDto(post);
 
         //로그인한 회원의 id
@@ -38,9 +40,13 @@ public class PostController {
         //빈 댓글Dto
         AddCommentDto addCommentDto = new AddCommentDto();
 
+        //북마크가 된 게시물인지 확인
+        boolean isBookmarked = bookMarkRepository.existsByMemberIdAndPostId(loginMemberId, id);
+
         model.addAttribute("postInfoDto", postInfoDto);
         model.addAttribute("addCommentDto", addCommentDto);
         model.addAttribute("loginMemberIdDto", loginMemberIdDto);
+        model.addAttribute("isBookmarked", isBookmarked);
 
         return "post";
     }

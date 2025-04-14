@@ -24,7 +24,7 @@ public class PostInfoDto {
     private String content;
     private Long commentCount;
     private Long likeCount;
-    private Long viewCount=0L;
+    private Long viewCount;
     private Long reportCount;
 
     private List<CommentDto> commentDtoList = new ArrayList<>();
@@ -52,6 +52,7 @@ public class PostInfoDto {
         postInfo.setCommentCount(post.getCommentCount());
         postInfo.setLikeCount(post.getVoteCount());
         postInfo.setReportCount(post.getReportCount());
+        postInfo.setViewCount(post.getViewCount());
 
         //댓글 생성
         List<Comment> comments = post.getComments();

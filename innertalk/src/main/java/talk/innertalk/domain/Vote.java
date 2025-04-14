@@ -24,11 +24,6 @@ public class Vote extends BaseTimeEntity {
     @JoinColumn(name = "post_id",nullable = false)
     private Post post;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "vote_type",nullable = false)
-    private VoteType voteType;
-
-
 
 
 }

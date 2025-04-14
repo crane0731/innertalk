@@ -48,6 +48,10 @@ public class Post extends BaseAuditingEntity {
     @ColumnDefault("0")
     private Long reportCount=0L;
 
+    @Column(name = "view_count", nullable = false)
+    @ColumnDefault("0")
+    private Long viewCount=0L;
+
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Comment> comments=new ArrayList<>();
 
@@ -77,6 +81,7 @@ public class Post extends BaseAuditingEntity {
      * 연관관계 편의 메서드 : 댓글 제거
      */
     public void delComment(Comment comment) {
+        minusCommentCount();
         comments.remove(comment);
         comment.setPost(null);
     }
@@ -86,6 +91,27 @@ public class Post extends BaseAuditingEntity {
      */
     private void addCommentCount(){
         commentCount++;
+    }
+
+    /**
+     * 댓글 수 감소
+     */
+    private void minusCommentCount(){
+        commentCount--;
+    }
+
+    /**
+     * 조회수 증가
+     */
+    public void addViewCount(){
+        viewCount++;
+    }
+
+    /**
+     * 조회수 감소
+     */
+    public void minusViewCount(){
+        viewCount--;
     }
 
 }
