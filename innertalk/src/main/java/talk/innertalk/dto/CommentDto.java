@@ -16,7 +16,6 @@ public class CommentDto {
     private Long id;
     private Long memberId;
     private String content;
-    private Long reportCount;
     private String createdDate;
 
 
@@ -35,7 +34,6 @@ public class CommentDto {
         commentDto.setId(comment.getId());
         commentDto.setMemberId(comment.getMember().getId());
         commentDto.setContent(comment.getContent());
-        commentDto.setReportCount(comment.getReportCount());
         commentDto.setCreatedDate(DateFormatUtil.DateFormat(comment.getCreatedDate()));
         return commentDto;
     }

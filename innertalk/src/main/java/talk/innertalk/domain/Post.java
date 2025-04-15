@@ -40,9 +40,9 @@ public class Post extends BaseAuditingEntity {
     @ColumnDefault("0")
     private Long commentCount=0L;
 
-    @Column(name = "vote_count", nullable = false)
+    @Column(name = "like_count", nullable = false)
     @ColumnDefault("0")
-    private Long voteCount=0L;
+    private Long likeCount=0L;
 
     @Column(name = "report_count", nullable = false)
     @ColumnDefault("0")
@@ -112,6 +112,20 @@ public class Post extends BaseAuditingEntity {
      */
     public void minusViewCount(){
         viewCount--;
+    }
+
+    /**
+     * 공감 수 증가
+     */
+    public void addLikeCount(){
+        likeCount++;
+    }
+
+    /**
+     * 신고 수 증가
+     */
+    public void addReportCount(){
+        reportCount++;
     }
 
 }

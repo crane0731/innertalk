@@ -8,25 +8,117 @@
 
     <style>
         body {
-            background: linear-gradient(to bottom, #343a40, #6c757d);
+            background: linear-gradient(to bottom, #343a40, #6c757d); /* 그라데이션 배경 */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            height: 100%;
+        }
+
+        /* 헤더 및 푸터 고정 */
+        header, footer {
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+            background-color: #343a40;
+        }
+
+        header {
+            top: 0;
+            padding: 1rem;
+            color: #fff;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        footer {
+            bottom: 0;
+            padding: 1rem;
+            color: #fff;
+            /*text-align: center;*/
+            font-size: 1rem;
+        }
+
+        .content-wrapper {
+            margin-top: 100px; /* 헤더 아래로 충분한 공간 추가 */
+            margin-bottom: 60px; /* 푸터 위로 충분한 공간 추가 */
+            padding: 2rem 0;
+            height: calc(100vh - 160px); /* 헤더와 푸터를 제외한 화면 높이 */
+            overflow-y: auto;
+        }
+
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1.5rem;
+            height: 100%; /* 카드 크기 고정 */
+        }
+
+        .card-body {
+            padding: 2rem;
+            max-height: 300px; /* 카드 내부 높이 고정 */
+            overflow-y: auto; /* 스크롤 추가 */
+        }
+
+        .card-header {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #f8f9fa;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #adb5bd;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #0a58ca;
+        }
+
+        .column-card {
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .column-card {
+                flex: 1 1 calc(33.333% - 2rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .column-card {
+                flex: 1 1 100%;
+            }
         }
     </style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body>
 
 <!-- Header -->
-<div th:replace="~{layout/header :: headerFragment}"></div>
+<header th:replace="~{layout/header :: headerFragment}"></header>
 
-<!-- Main Section -->
-<section class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+<!-- Main Content Section -->
+<section class="content-wrapper d-flex justify-content-center align-items-start">
     <div class="container">
-        <div class="row justify-content-center align-items-center">
+        <div class="row justify-content-center">
 
-            <!-- 첫 번째 카드 -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-center text-white" style="border-radius: 1rem; height: 100%;">
-                    <div class="card-body p-5">
-                        <h2>나의 정보</h2>
+            <!-- 첫 번째 카드: 나의 정보 -->
+            <div class="col-md-4 column-card">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h2 class="card-header">나의 정보</h2>
                         <div th:text="|닉네임 : ${memberInfoResponseDto.nickname}|"></div>
                         <div th:text="|이메일 : ${memberInfoResponseDto.email}|"></div>
                         <div th:text="|회원 등급 : ${memberInfoResponseDto.memberRole}|"></div>
@@ -34,41 +126,80 @@
                 </div>
             </div>
 
-            <!-- 두 번째 카드 -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-center text-white" style="border-radius: 1rem; height: 100%;">
-                    <div class="card-body p-5">
-                        <h2>내가 쓴 게시글</h2>
-                        <!-- 게시글 목록 반복 -->
-                        <div th:each="post : ${memberInfoResponseDto.postDtos}" class="card my-2 bg-light text-dark">
-                            <div class="card-body">
-                                <h5 th:text="${post.title}">게시글 제목</h5>
-                                <p th:text="'작성일 : ' + ${post.createdDate}"></p>
-                                <!-- 클릭 시 상세 페이지 이동 (예시) -->
-                                <form th:action="@{/innertalk/posts/{id}(id=${post.id})}" method="get">
-                                    <button class="btn btn-sm btn-primary" type="submit">보기</button>
-                                </form>
+            <!-- 두 번째 카드: 내가 쓴 게시글 -->
+            <div class="col-md-4 column-card">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h2 class="card-header">내가 쓴 게시글</h2>
+                        <div th:each="post : ${memberInfoResponseDto.postDtos}">
+                            <div class="card my-2 bg-light text-dark">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${post.title}">게시글 제목</h5>
+                                    <p th:text="'작성일 : ' + ${post.createdDate}"></p>
+                                    <form th:action="@{/innertalk/posts/{id}(id=${post.id})}" method="get">
+                                        <button class="btn btn-sm btn-primary" type="submit">보기</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
 
-            <!-- 세 번째 카드 -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-center text-white" style="border-radius: 1rem; height: 100%;">
-                    <div class="card-body p-5">
-                        <h2>나의 북마크</h2>
-                        <!-- 게시글 목록 반복 -->
-                        <div th:each="bookmark : ${memberInfoResponseDto.bookMarkDtos}" class="card my-2 bg-light text-dark">
-                            <div class="card-body">
-                                <h5 th:text="${bookmark.postTitle}">게시글 제목</h5>
-                                <p th:text="'작성일 : ' + ${bookmark.postCreatedDate}"></p>
-                                <!-- 클릭 시 상세 페이지 이동 (예시) -->
-                                <form th:action="@{/innertalk/posts/{id}(id=${bookmark.id})}" method="get">
-                                    <button class="btn btn-sm btn-primary" type="submit">보기</button>
-                                </form>
+            <!-- 세 번째 카드: 나의 북마크 -->
+            <div class="col-md-4 column-card">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h2 class="card-header">나의 북마크</h2>
+                        <div th:each="bookmark : ${memberInfoResponseDto.bookMarkDtos}">
+                            <div class="card my-2 bg-light text-dark">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${bookmark.postTitle}">게시글 제목</h5>
+                                    <p th:text="'작성일 : ' + ${bookmark.postCreatedDate}"></p>
+                                    <form th:action="@{/innertalk/posts/{id}(id=${bookmark.postId})}" method="get">
+                                        <button class="btn btn-sm btn-primary" type="submit">보기</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 네 번째 카드: 공감한 게시물 -->
+            <div class="col-md-4 column-card">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h2 class="card-header">공감한 게시물</h2>
+                        <div th:each="like : ${memberInfoResponseDto.likePostListDtos}">
+                            <div class="card my-2 bg-light text-dark">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${like.postTitle}">게시글 제목</h5>
+                                    <p th:text="'작성일 : ' + ${like.postCreatedDate}"></p>
+                                    <form th:action="@{/innertalk/posts/{id}(id=${like.postId})}" method="get">
+                                        <button class="btn btn-sm btn-primary" type="submit">보기</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 다섯 번째 카드: 신고한 게시물 -->
+            <div class="col-md-4 column-card">
+                <div class="card bg-dark text-white">
+                    <div class="card-body">
+                        <h2 class="card-header">신고한 게시물</h2>
+                        <div th:each="report : ${memberInfoResponseDto.reportPostListDtos}">
+                            <div class="card my-2 bg-light text-dark">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${report.postTitle}">게시글 제목</h5>
+                                    <p th:text="'작성일 : ' + ${report.postCreatedDate}"></p>
+                                    <form th:action="@{/innertalk/posts/{id}(id=${report.postId})}" method="get">
+                                        <button class="btn btn-sm btn-primary" type="submit">보기</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +211,7 @@
 </section>
 
 <!-- Footer -->
-<div th:replace="~{layout/footer :: footerFragment}"></div>
+<footer th:replace="~{layout/footer :: footerFragment}"></footer>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>

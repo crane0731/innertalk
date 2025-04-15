@@ -8,7 +8,12 @@ import talk.innertalk.domain.baseentity.BaseAuditingEntity;
 
 
 @Entity
-@Table(name = "post_report")
+@Table(
+        name = "post_report",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"member_id", "post_id"})
+        }
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostReport  extends BaseAuditingEntity {
@@ -22,9 +27,8 @@ public class PostReport  extends BaseAuditingEntity {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id",nullable = false)
+    @JoinColumn(name = "post_id")
     private Post post;
-
 
     @Column(name = "reason", nullable = false)
     private String reason;
@@ -32,6 +36,19 @@ public class PostReport  extends BaseAuditingEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "report_status",nullable = false)
     private ReportStatus reportStatus;
+
+
+    /**
+     * 생성 메서드
+     */
+    public static PostReport create(Member member , Post post , String reason){
+        PostReport postReport = new PostReport();
+        postReport.member=member;
+        postReport.post=post;
+        postReport.reason= reason;
+        postReport.reportStatus=ReportStatus.PENDING;
+        return postReport;
+    }
 
 
 }

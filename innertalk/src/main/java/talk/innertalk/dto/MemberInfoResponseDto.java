@@ -21,6 +21,9 @@ public class MemberInfoResponseDto {
     private String memberRole;
     private List<PostListDto> postDtos=new ArrayList<>();
     private List<BookMarkListDto> BookMarkDtos=new ArrayList<>();
+    private List<LikePostListDto> likePostListDtos= new ArrayList<>();
+    private List<ReportPostListDto> reportPostListDtos = new ArrayList<>();
+
 
     public MemberInfoResponseDto() {
 

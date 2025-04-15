@@ -28,5 +28,6 @@ public class BookMarkListDto {
             dto.setPostCreatedDate(DateFormatUtil.DateFormat(bookMark.getPost().getCreatedDate()));
 
             return dto;
+
     }
 }

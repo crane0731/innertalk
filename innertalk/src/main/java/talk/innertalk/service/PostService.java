@@ -14,9 +14,7 @@ import talk.innertalk.dto.AddPostDto;
 import talk.innertalk.dto.PostListDto;
 import talk.innertalk.exception.CustomException;
 import talk.innertalk.exception.ErrorMessages;
-import talk.innertalk.repository.BookMarkRepository;
-import talk.innertalk.repository.CategoryRepository;
-import talk.innertalk.repository.PostRepository;
+import talk.innertalk.repository.*;
 
 import java.util.List;
 
@@ -29,6 +27,8 @@ public class PostService {
     private final CategoryRepository categoryRepository;
     private final MemberService memberService;
     private final BookMarkRepository bookMarkRepository;
+    private final PostReportRepository postReportRepository;
+    private final LikeRepository likeRepository;
 
     /**
      * 북마크에 게시글을 추가
@@ -95,6 +95,12 @@ public class PostService {
 
         //게시글의 아이디를 가지고 있는 모든 북마크 삭제
         bookMarkRepository.deleteByPostId(postId);
+
+        //게시글의 아이디를 가지고 있는 모든 공감 삭제
+        likeRepository.deleteByPostId(postId);
+
+        //게시글의 아이디를 가지고 있는 모든 게시글 신고 삭제
+        postReportRepository.deleteByPostId(postId);
 
         //게시글 삭제
         postRepository.deleteById(postId);

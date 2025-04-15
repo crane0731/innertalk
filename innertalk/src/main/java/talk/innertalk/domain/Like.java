@@ -2,18 +2,24 @@ package talk.innertalk.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import talk.innertalk.domain.baseentity.BaseTimeEntity;
 
 @Entity
-@Table(name = "vote")
+@Table(
+        name = "likes",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"member_id", "post_id"})
+        }
+)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Vote extends BaseTimeEntity {
+public class Like extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vote_id")
+    @Column(name = "likes_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,5 +31,10 @@ public class Vote extends BaseTimeEntity {
     private Post post;
 
 
+    @Builder
+    public Like(Member member, Post post) {
+        this.member = member;
+        this.post = post;
+    }
 
 }

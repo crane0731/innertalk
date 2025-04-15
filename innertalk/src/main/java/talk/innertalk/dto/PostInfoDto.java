@@ -50,7 +50,7 @@ public class PostInfoDto {
         postInfo.setCategory(post.getCategory().getName());
         postInfo.setContent(post.getContent());
         postInfo.setCommentCount(post.getCommentCount());
-        postInfo.setLikeCount(post.getVoteCount());
+        postInfo.setLikeCount(post.getLikeCount());
         postInfo.setReportCount(post.getReportCount());
         postInfo.setViewCount(post.getViewCount());
 

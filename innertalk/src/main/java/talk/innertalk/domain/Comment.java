@@ -31,11 +31,7 @@ public class Comment extends BaseAuditingEntity {
 
     @Column(name = "content", nullable = false)
     private String content;
-
-    @Column(name = "report_count", nullable = false)
-    @ColumnDefault("0")
-    private Long reportCount=0L;
-
+    
     @Builder
     public Comment(Member member, String content) {
         this.member = member;
@@ -46,4 +42,6 @@ public class Comment extends BaseAuditingEntity {
     public Comment(String content) {
         this.content = content;
     }
+
+
 }

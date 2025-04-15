@@ -7,11 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import talk.innertalk.domain.Member;
 import talk.innertalk.domain.Post;
-import talk.innertalk.dto.AddCommentDto;
-import talk.innertalk.dto.AddPostDto;
-import talk.innertalk.dto.LoginMemberIdDto;
-import talk.innertalk.dto.PostInfoDto;
+import talk.innertalk.dto.*;
 import talk.innertalk.repository.BookMarkRepository;
+import talk.innertalk.repository.LikeRepository;
+import talk.innertalk.repository.PostReportRepository;
 import talk.innertalk.service.MemberService;
 import talk.innertalk.service.PostService;
 
@@ -24,12 +23,16 @@ public class PostController {
     private final MemberService memberService;
     private final PostService postService;
     private final BookMarkRepository bookMarkRepository;
-
+    private final LikeRepository likeRepository;
+    private final PostReportRepository postReportRepository;
     /**
      * 게시글 보기
      */
     @GetMapping("/posts/{id}")
     public String postPage(@PathVariable("id")Long id, Model model) {
+
+        HomeMemberDto memberDto = getHomeMemberDto();
+
         Post post = postService.findPostAndAddViewCount(id);
         PostInfoDto postInfoDto = PostInfoDto.createDto(post);
 
@@ -40,13 +43,30 @@ public class PostController {
         //빈 댓글Dto
         AddCommentDto addCommentDto = new AddCommentDto();
 
+        //빈 게시글 신고 Dto
+        AddPostReportDto addPostReportDto = new AddPostReportDto();
+
+        //빈 댓글 신고 Dto
+        AddCommentReportDto addCommentReportDto = new AddCommentReportDto();
+
         //북마크가 된 게시물인지 확인
         boolean isBookmarked = bookMarkRepository.existsByMemberIdAndPostId(loginMemberId, id);
 
+        //공감이 된 게시물인지 확인
+        boolean isLiked = likeRepository.existsByMemberIdAndPostId(loginMemberId, id);
+
+        //신고된 게시물인지 확인
+        boolean isPostReported = postReportRepository.existsByMemberIdAndPostId(loginMemberId, id);
+
+        model.addAttribute("memberDto", memberDto);
         model.addAttribute("postInfoDto", postInfoDto);
         model.addAttribute("addCommentDto", addCommentDto);
+        model.addAttribute("addPostReportDto",addPostReportDto);
+        model.addAttribute("addCommentReportDto",addCommentReportDto);
         model.addAttribute("loginMemberIdDto", loginMemberIdDto);
         model.addAttribute("isBookmarked", isBookmarked);
+        model.addAttribute("isLiked",isLiked);
+        model.addAttribute("isPostReported",isPostReported);
 
         return "post";
     }
@@ -57,8 +77,12 @@ public class PostController {
     @GetMapping("/write")
     public String writePage(Model model) {
 
+        HomeMemberDto memberDto = getHomeMemberDto();
+
+
         AddPostDto addPostDto = new AddPostDto();
         model.addAttribute("addPostDto", addPostDto);
+        model.addAttribute("memberDto", memberDto);
 
         return "writePage";
     }
@@ -106,6 +130,24 @@ public class PostController {
 
     }
 
+
+    /**
+     * HomeMemberDto 조회
+     */
+    private HomeMemberDto getHomeMemberDto() {
+        Member loginMember = memberService.getLoginMember();
+
+        HomeMemberDto memberDto;
+
+        if(loginMember != null) {
+            memberDto=HomeMemberDto.toEntity(loginMember);
+        }
+
+        else {
+            memberDto=new HomeMemberDto();
+        }
+        return memberDto;
+    }
 
 
 }
