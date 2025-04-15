@@ -48,6 +48,7 @@ public class LikeService {
 
         //게시글의 공감수 증가 시키기
         post.addLikeCount();
+        post.getMember().addLikedCount();
 
         //like 저장
         try{

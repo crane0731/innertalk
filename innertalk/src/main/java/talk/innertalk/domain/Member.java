@@ -35,6 +35,14 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_role")
     private MemberRole memberRole;
 
+    @Column(name = "reportedCount")
+    @ColumnDefault("0")
+    private Long reportedCount=0L;
+
+    @Column(name = "likedCount")
+    @ColumnDefault("0")
+    private Long likedCount=0L;
+
     @OneToMany(mappedBy = "member",cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Post> posts=new ArrayList<>();
 
@@ -60,6 +68,18 @@ public class Member extends BaseTimeEntity {
         post.setMember(this);
     }
 
+    /**
+     * reportedCount 증가
+     */
+    public void addReportdCount(){
+        reportedCount++;
+    }
 
+    /**
+     * likedCount 증가
+     */
 
+    public void addLikedCount(){
+        likedCount++;
+    }
 }

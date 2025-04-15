@@ -2,6 +2,7 @@ package talk.innertalk.controller;
 
 import lombok.Generated;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/innertalk")
@@ -63,6 +65,7 @@ public class HomeController {
      * HomeMemberDto 조회
      */
     private HomeMemberDto getHomeMemberDto() {
+        log.info("여긴가?????");
         Member loginMember = memberService.getLoginMember();
 
         HomeMemberDto memberDto;

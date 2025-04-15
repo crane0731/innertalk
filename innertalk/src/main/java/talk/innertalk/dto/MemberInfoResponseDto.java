@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 public class MemberInfoResponseDto {
 
+    private Long id;
     private String email;
     private String nickname;
     private String memberRole;
@@ -31,6 +32,7 @@ public class MemberInfoResponseDto {
 
     public static MemberInfoResponseDto createDto(Member member) {
         MemberInfoResponseDto dto = new MemberInfoResponseDto();
+        dto.setId(member.getId());
         dto.setEmail(member.getEmail());
         dto.setNickname(member.getNickname());
         dto.setMemberRole(member.getMemberRole().toString());

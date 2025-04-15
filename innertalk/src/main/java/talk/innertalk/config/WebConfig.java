@@ -20,6 +20,7 @@ public class WebConfig {
         http
                 .authorizeHttpRequests((auth)->auth
                         .requestMatchers("/innertalk/","/innertalk","/innertalk/home","/innertalk/login","/innertalk/signup").permitAll()
+                        .requestMatchers("/innertalk/admin").hasAnyRole("ADMIN")
                         .anyRequest().authenticated()
                 );
 

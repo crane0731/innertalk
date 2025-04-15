@@ -122,6 +122,13 @@
                         <div th:text="|닉네임 : ${memberInfoResponseDto.nickname}|"></div>
                         <div th:text="|이메일 : ${memberInfoResponseDto.email}|"></div>
                         <div th:text="|회원 등급 : ${memberInfoResponseDto.memberRole}|"></div>
+
+                        <br>
+                        <form th:action="@{/innertalk/members/{id}(id=${memberInfoResponseDto.id})}" method="post"
+                              th:object="${memberDto}" onsubmit="return confirm('정말 탈퇴하시겠습니까?');">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <button class="btn btn-danger" type="submit">회원 탈퇴</button>
+                        </form>
                     </div>
                 </div>
             </div>

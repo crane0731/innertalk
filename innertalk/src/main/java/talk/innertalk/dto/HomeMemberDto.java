@@ -15,19 +15,22 @@ import talk.innertalk.domain.Member;
 public class HomeMemberDto {
 
     private String nickname;
+    private String role;
 
     public HomeMemberDto() {
     }
 
     @Builder
-    public HomeMemberDto(String nickname) {
+    public HomeMemberDto(String nickname,String role) {
         this.nickname = nickname;
+        this.role = role;
     }
 
     // Member -> HomeMemberDto 변환
     public static HomeMemberDto toEntity(Member member) {
         return HomeMemberDto.builder()
                 .nickname(member.getNickname())
+                .role(member.getMemberRole().toString())
                 .build();
     }
 }

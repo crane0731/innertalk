@@ -12,17 +12,24 @@
                 🕊️ 속마음
             </a>
 
-                <div th:if="${memberDto!=null}">
-                    <div th:if="${memberDto.nickname!=null}">
-                        <span class="text-white fw-bold fs-5" th:text="${memberDto.nickname}"></span>
-                        <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/mypage}'|">마이페이지</button>
-                        <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/logout}'|">로그아웃</button>
-                    </div>
-                    <div th:if="${memberDto.nickname==null}">
-                        <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/login}'|">로그인</button>
-                        <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/signup}'|">회원가입</button>
-                    </div>
+            <div th:if="${memberDto != null}">
+                <div th:if="${memberDto.nickname == null}">
+                    <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/login}'|">로그인</button>
+                    <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/signup}'|">회원가입</button>
                 </div>
+
+                <div th:if="${memberDto.nickname != null}" class="d-flex align-items-center">
+                    <span class="text-white fw-bold fs-5 me-2" th:text="${memberDto.nickname}"></span>
+                    <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/mypage}'|">마이페이지</button>
+                    <button class="btn btn-light ms-2" th:onclick="|location.href='@{/innertalk/logout}'|">로그아웃</button>
+
+                    <!-- 관리자만 보이는 버튼 -->
+                    <button class="btn btn-light ms-2"
+                            th:if="${memberDto.role == 'ADMIN'}"
+                            th:onclick="|location.href='@{/innertalk/admin}'|">관리자 페이지</button>
+                </div>
+            </div>
+
 
         </div>
     </header>

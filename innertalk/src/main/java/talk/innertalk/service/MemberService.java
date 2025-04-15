@@ -1,23 +1,70 @@
 package talk.innertalk.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import talk.innertalk.domain.Like;
 import talk.innertalk.domain.Member;
 import talk.innertalk.domain.MemberRole;
+import talk.innertalk.domain.PostReport;
 import talk.innertalk.dto.JoinRequestDto;
+import talk.innertalk.dto.admin.AdminMemberListDto;
 import talk.innertalk.exception.CustomException;
 import talk.innertalk.exception.ErrorMessages;
+import talk.innertalk.repository.LikeRepository;
 import talk.innertalk.repository.MemberRepository;
+import talk.innertalk.repository.PostReportRepository;
 
+import java.util.List;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+        private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final LikeRepository likeRepository;
+    private final PostReportRepository postReportRepository;
+
+    /**
+     * 관리자-모든 회원 조회 (관리자)
+     */
+    public List<AdminMemberListDto> findAllMember(){
+        return memberRepository.findAll().stream().map(AdminMemberListDto::createDto).toList();
+    }
+
+    /**
+     * 회원 삭제
+     */
+    @Transactional
+    public void deleteMember(Long memberId) {
+
+
+        //회원 조회
+        Member member = findMember(memberId);
+
+        //회원 아이디로 like 조회
+        List<Like> likes = likeRepository.findByMemberId(memberId);
+
+        //like 삭제
+        likeRepository.deleteAll(likes);
+
+        //회원 아이디로 Report 조회
+        List<PostReport> postReports = postReportRepository.findByMemberId(memberId);
+
+        //Report 삭제
+        postReportRepository.deleteAll(postReports);
+
+
+        //회원 삭제
+        memberRepository.deleteById(memberId);
+
+    }
+
 
     /**
      * 회원 조회

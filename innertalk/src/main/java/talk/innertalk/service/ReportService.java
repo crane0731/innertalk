@@ -60,6 +60,7 @@ public class ReportService {
         }
 
         post.addReportCount();
+        post.getMember().addReportdCount();
     }
 
 
