@@ -1,0 +1,32 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: innertalk
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/innertalk
+    username: crane
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+
+mybatis:
+  type-aliases-package: talk.innertalk.domain
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.springframework.security: DEBUG
+    talk.innertalk.repository.mybatis: trace
