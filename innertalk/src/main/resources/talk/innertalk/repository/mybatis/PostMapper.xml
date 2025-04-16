@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="talk.innertalk.repository.mybatis.PostMapper">
+
+    <select id="findAll" resultType="Post">
+        select
+            post_id AS id,
+            title,
+            created_date
+        from post
+        <where>
+            <if test="searchPostDto.postTitle != null and searchPostDto.postTitle != ''">
+                and title like concat('%',#{searchPostDto.postTitle},'%')
+            </if>
+        </where>
+
+        <if test="searchPostDto.sortType == null or searchPostDto.sortType == 'latest'">
+            ORDER BY created_date DESC
+        </if>
+        <if test="searchPostDto.sortType=='oldest'">
+            ORDER BY created_date ASC
+        </if>
+        <if test="searchPostDto.sortType == 'like'">
+            ORDER BY like_count DESC
+        </if>
+
+    </select>
+
+</mapper>

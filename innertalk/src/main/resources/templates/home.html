@@ -28,11 +28,11 @@
             flex: 1;
             height: 100vh; /* 화면 전체를 채우기 위해 */
             overflow: hidden; /* 게시글 영역만 스크롤되도록 */
+            padding-top: 20px; /* main 영역에만 여백 추가 */
         }
 
         /* 카드 디자인 */
         .card {
-
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가로 입체감 */
             background: #2b2f37; /* 카드 배경 */
             height: 400px; /* 카드 높이를 고정 */
@@ -70,12 +70,12 @@
             height: calc(100% - 60px); /* 카드 높이를 빼고 내용만 스크롤되도록 */
         }
 
-            /* 버튼 디자인 */
-            .btn-outline-light {
-                border: 1px solid #ffffff;
-                color: white;
-                background-color: transparent;
-            }
+        /* 버튼 디자인 */
+        .btn-outline-light {
+            border: 1px solid #ffffff;
+            color: white;
+            background-color: transparent;
+        }
 
         .btn-outline-light:hover {
             background-color: #6c757d;
@@ -119,7 +119,18 @@
         .btn-primary-sm:hover {
             background-color: #084298;
         }
+
+        .custom-width {
+            width: 200px;
+        }
+
+        /* 검색 및 글쓰기 폼의 여백 조정 */
+        .d-flex {
+            padding-top: 10px; /* 버튼들이 상단에서 적당히 떨어지게 하기 위한 여백 */
+            margin-bottom: 10px;
+        }
     </style>
+
 
     <title>속마음</title>
 </head>
@@ -131,20 +142,25 @@
 
 <main>
     <!-- 검색 및 글쓰기 폼 -->
-    <form class="d-flex justify-content-center search-form" method="get" th:action="@{/innertalk}">
-        <button class="btn btn-outline-light me-3" type="button" th:onclick="|location.href='@{/innertalk/write}'|">글쓰기</button>
+    <div class="d-flex justify-content-center align-items-center">
+        <!-- 글쓰기 버튼 폼 -->
+        <form class="d-flex" method="get" th:action="@{/innertalk}">
+            <button class="btn btn-outline-light me-3" type="button" th:onclick="|location.href='@{/innertalk/write}'|">글쓰기</button>
+        </form>
 
-        <div class="d-flex align-items-center">
-            <select class="form-select w-auto ms-3" name="sort">
-                <option value="" disabled selected>정렬 기준</option>
-                <option value="latest">최신순</option>
-                <option value="oldest">오래된순</option>
-                <option value="popular">공감순</option>
+        <!-- 검색 폼 -->
+        <form class="d-flex align-items-center" th:object="${searchPostDto}" method="get">
+            <input type="text" th:field="*{postTitle}" class="form-control me-3 custom-width" placeholder="게시글 제목"/>
+
+            <select th:field="*{sortType}" class="form-select w-auto me-3">
+                <option th:value="latest">최신순</option>
+                <option th:value="oldest">오래된순</option>
+                <option th:value="like">공감순</option>
             </select>
 
-            <button class="btn btn-light ms-3" type="submit">검색</button>
-        </div>
-    </form>
+            <button class="btn btn-outline-light me-3" type="submit">검색</button>
+        </form>
+    </div>
 
     <section class="h-100 d-flex justify-content-center align-items-center mb-5 ms-5 me-5" style="margin-top: -40px;">
         <div class="card bg-dark text-white w-100">

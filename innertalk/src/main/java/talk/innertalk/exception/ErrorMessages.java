@@ -11,8 +11,7 @@ public final class ErrorMessages {
     public static final String DUPLICATED_BOOKMARK="이미 북마크한 게시글입니다.";
     public static final String EXISTS_LIKE="이미 공감한 게시글입니다.";
     public static final String EXISTS_REPORT_POST="이미 신고한 게시글입니다.";
-    public static final String EXISTS_REPORT_COMMENT="이미 신고한 댓글입니다.";
-
+    public static final String No_SUCH_REPORT = "신고를 찾을 수 없습니다.";
 
 
     private ErrorMessages() {

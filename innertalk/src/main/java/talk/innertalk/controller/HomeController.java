@@ -8,11 +8,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import talk.innertalk.domain.Member;
 import talk.innertalk.dto.HomeMemberDto;
 import talk.innertalk.dto.PostListDto;
+import talk.innertalk.dto.SearchPostDto;
 import talk.innertalk.service.CustomUserDetail;
 import talk.innertalk.service.MemberService;
 import talk.innertalk.service.PostService;
@@ -36,16 +38,16 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(@ModelAttribute("searchPostDto") SearchPostDto searchPostDto, Model model) {
 
         HomeMemberDto memberDto = getHomeMemberDto();
 
-        List<PostListDto> postListDtos = getPostListDtos();
+        List<PostListDto> postListDtos = postService.findAllByCondition(searchPostDto);
 
+        //List<PostListDto> postListDtos = getPostListDtos();
 
         model.addAttribute("postListDtos", postListDtos);
         model.addAttribute("memberDto", memberDto);
-
 
 
         return "home";
@@ -53,13 +55,13 @@ public class HomeController {
 
 
 
-    /**
-     *PostListDtos 조회
-     */
-    private List<PostListDto> getPostListDtos() {
-        List<PostListDto> postListDtos = postService.findPageAll();
-        return postListDtos;
-    }
+//    /**
+//     *PostListDtos 조회
+//     */
+//    private List<PostListDto> getPostListDtos() {
+//        List<PostListDto> postListDtos = postService.findPageAll();
+//        return postListDtos;
+//    }
 
     /**
      * HomeMemberDto 조회

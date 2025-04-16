@@ -12,9 +12,11 @@ import talk.innertalk.domain.*;
 import talk.innertalk.dto.AddCommentDto;
 import talk.innertalk.dto.AddPostDto;
 import talk.innertalk.dto.PostListDto;
+import talk.innertalk.dto.SearchPostDto;
 import talk.innertalk.exception.CustomException;
 import talk.innertalk.exception.ErrorMessages;
 import talk.innertalk.repository.*;
+import talk.innertalk.repository.mybatis.MyBatisPostRepository;
 
 import java.util.List;
 
@@ -29,11 +31,26 @@ public class PostService {
     private final BookMarkRepository bookMarkRepository;
     private final PostReportRepository postReportRepository;
     private final LikeRepository likeRepository;
+    private final MyBatisPostRepository myBatisPostRepository;
+
+    /**
+     * mybatis - 조건에 따라 게시글 검색
+     * PostListDto 반환
+     */
+    public List<PostListDto> findAllByCondition(SearchPostDto searchPostDto) {
+        List<PostListDto> list = myBatisPostRepository.findAll(searchPostDto).stream().map(PostListDto::createDto).toList();
+        for (PostListDto postListDto : list) {
+            System.out.println("postListDto.getId() = " + postListDto.getId());
+            System.out.println("postListDto.getTitle() = " + postListDto.getTitle());
+        }
+        return list;
+    }
+
+
 
     /**
      * 북마크에 게시글을 추가
      */
-
     @Transactional
     public void addBookMark(Member member, Post post) {
         BookMark.createBookMark(member, post);

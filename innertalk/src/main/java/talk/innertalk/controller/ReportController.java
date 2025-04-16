@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import talk.innertalk.domain.PostReport;
 import talk.innertalk.dto.AddCommentReportDto;
 import talk.innertalk.dto.AddPostReportDto;
 import talk.innertalk.service.ReportService;
@@ -40,5 +41,32 @@ public class ReportController {
         reportService.reportPost(addPostReportDto);
         return "redirect:/innertalk/posts/" + postId;
     }
+
+
+    /**
+     * 신고 승인
+     */
+    @PostMapping("/approve/report/{reportId}")
+    public String approveReport(@PathVariable("reportId") Long reportId){
+
+        //report 조회후 승인
+        reportService.reportApprove(reportId);
+
+        return "redirect:/innertalk/admin";
+    }
+
+
+    /**
+     * 신고 거절
+     */
+    @PostMapping("/reject/report/{reportId}")
+    public String rejectReport(@PathVariable("reportId") Long reportId){
+
+        //report 조회후 거절
+        reportService.reportReject(reportId);
+
+        return "redirect:/innertalk/admin";
+    }
+
 
 }

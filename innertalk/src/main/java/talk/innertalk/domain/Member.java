@@ -35,11 +35,11 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_role")
     private MemberRole memberRole;
 
-    @Column(name = "reportedCount")
+    @Column(name = "reported_count")
     @ColumnDefault("0")
     private Long reportedCount=0L;
 
-    @Column(name = "likedCount")
+    @Column(name = "liked_count")
     @ColumnDefault("0")
     private Long likedCount=0L;
 

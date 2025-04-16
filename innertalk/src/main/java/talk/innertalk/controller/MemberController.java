@@ -81,6 +81,18 @@ public class MemberController {
         return "redirect:/innertalk/home";
     }
 
+    /**
+     * 관리자 - 회원 삭제
+     */
+    @DeleteMapping("/admin/members/{memberId}")
+    public String deleteMemberAdmin(@PathVariable("memberId") Long memberId, HttpServletRequest request, HttpServletResponse response) {
+        //회원 삭제
+        memberService.deleteMember(memberId);
+
+        return "redirect:/innertalk/admin";
+    }
+
+
 
     /**
      * 수동 로그아웃

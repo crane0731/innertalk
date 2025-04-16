@@ -51,4 +51,19 @@ public class PostReport  extends BaseAuditingEntity {
     }
 
 
+    /**
+     * 신고 상태 변경 - 승인
+     */
+    public void reportApprove(){
+        reportStatus=ReportStatus.APPROVED;
+    }
+
+    /**
+     * 신고 상태 변경 - 거절
+     */
+    public void reportReject(){
+        reportStatus=ReportStatus.REJECTED;
+    }
+
+
 }

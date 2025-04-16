@@ -11,12 +11,14 @@ import talk.innertalk.domain.Member;
 import talk.innertalk.domain.MemberRole;
 import talk.innertalk.domain.PostReport;
 import talk.innertalk.dto.JoinRequestDto;
+import talk.innertalk.dto.SearchMemberDto;
 import talk.innertalk.dto.admin.AdminMemberListDto;
 import talk.innertalk.exception.CustomException;
 import talk.innertalk.exception.ErrorMessages;
 import talk.innertalk.repository.LikeRepository;
 import talk.innertalk.repository.MemberRepository;
 import talk.innertalk.repository.PostReportRepository;
+import talk.innertalk.repository.mybatis.MyBatisMemberRepository;
 
 import java.util.List;
 
@@ -26,9 +28,18 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-        private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final LikeRepository likeRepository;
     private final PostReportRepository postReportRepository;
+    private final MyBatisMemberRepository myBatisMemberRepository;
+
+    /**
+     * 관리자 - 모든 회원 조회 (조건 : 이름)
+     */
+    public List<AdminMemberListDto> findAllMemberByCondition(SearchMemberDto searchMemberDto) {
+        return myBatisMemberRepository.findAll(searchMemberDto).stream().map(AdminMemberListDto::createDto).toList();
+    }
+
 
     /**
      * 관리자-모든 회원 조회 (관리자)

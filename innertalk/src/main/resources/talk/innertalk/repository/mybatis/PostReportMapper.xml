@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="talk.innertalk.repository.mybatis.PostReportMapper">
+
+    <!-- AdminReportInfoDto 매핑 -->
+    <resultMap id="AdminReportInfoDtoMap" type="talk.innertalk.dto.admin.AdminReportInfoDto">
+        <id property="id" column="post_report_id"/>
+        <result property="reporterId" column="member_id"/>
+        <result property="reporterEmail" column="member_email"/>
+        <result property="reportedId" column="reported_member_id"/>
+        <result property="reportedEmail" column="reported_member_email"/>
+        <result property="postId" column="post_id"/>
+        <result property="reason" column="reason"/>
+        <result property="reportStatus" column="report_status"/>
+        <result property="createdDate" column="created_date"/>
+    </resultMap>
+
+    <!-- 관리자용 신고 목록 전체 조회 -->
+    <select id="findAll" resultMap="AdminReportInfoDtoMap">
+        SELECT
+        pr.post_report_id AS post_report_id,
+        pr.member_id,
+        m.email AS member_email,
+        pr.post_id,
+        p.member_id AS reported_member_id,
+        rm.email AS reported_member_email,
+        pr.reason,
+        pr.report_status,
+        pr.created_date
+        FROM post_report pr
+        JOIN member m ON pr.member_id = m.member_id -- 신고자
+        JOIN post p ON pr.post_id = p.post_id
+        JOIN member rm ON p.member_id = rm.member_id -- 피신고자 (게시글 작성자)
+
+        <where>
+            <if test="searchReportDto.reporterName != null and searchReportDto.reporterName != ''">
+                AND m.nickname LIKE CONCAT('%', #{searchReportDto.reporterName}, '%')
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>

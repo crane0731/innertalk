@@ -60,14 +60,45 @@
 <div th:replace="~{layout/header :: headerFragment}"></div>
 
 <main>
-    <section class="h-100 d-flex justify-content-center align-items-center mb-5 ms-5 me-5" style="margin-top: -40px;">
+    <section class="h-100 d-flex justify-content-center align-items-center mb-5 ms-5 me-5" style="margin-top: -60px;">
         <div class="container">
             <div class="row g-4 justify-content-center">
                 <!-- 게시글 관리 -->
                 <div class="col-md-4">
                     <div class="card bg-dark text-white h-100">
                         <div class="card-body p-5 text-center">
+
+
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex align-items-center" th:object="${searchPostDto}" method="get">
+                                    <input type="text"  th:field="*{postTitle}" class="form-control me-3 custom-width" placeholder="게시글 제목"/>
+                                    <button class="btn btn-outline-light me-3" type="submit">검색</button>
+                                </form>
+                            </div>
+
+
+
                             <h2>게시글 관리</h2>
+
+
+                            <div class="mt-4 text-start" style="max-height: 300px; overflow-y: auto;">
+                                <div th:each="post : ${allPostList}" class="card bg-secondary mb-2">
+
+                                    <div class="card-body p-3">
+
+                                        <h5 class="card-title" th:text="${post.title}">제목</h5>
+                                        <p class="card-text mb-1" th:text="'생성일: ' + ${post.createdDate}">생성일</p>
+
+                                        <form th:action="@{/innertalk/posts/{id}(id=${post.id})}" method="get">
+                                            <button class="btn btn-sm btn-primary" type="submit">보기</button>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -76,6 +107,14 @@
                 <div class="col-md-4">
                     <div class="card bg-dark text-white h-100">
                         <div class="card-body p-5 text-center">
+
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex align-items-center" th:object="${searchMemberDto}" method="get">
+                                    <input type="text"  th:field="*{memberName}" class="form-control me-3 custom-width" placeholder="회원 닉네임"/>
+                                    <button class="btn btn-outline-light me-3" type="submit">검색</button>
+                                </form>
+                            </div>
+
                             <h2>회원 관리</h2>
 
                             <div class="mt-4 text-start" style="max-height: 300px; overflow-y: auto;">
@@ -85,7 +124,7 @@
 
                                         <!-- 삭제 버튼 -->
                                         <div th:if = "${member.role != 'ADMIN'}">
-                                            <form th:action="@{/innertalk/main}" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                                            <form th:action="@{/innertalk/admin/members/{id}(id=${member.id})}" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
                                                 <input type="hidden" name="_method" value="delete"/>
                                                 <button class="btn btn-sm btn-danger mb-2" type="submit">회원 삭제</button>
                                             </form>
@@ -114,7 +153,46 @@
                 <div class="col-md-4">
                     <div class="card bg-dark text-white h-100">
                         <div class="card-body p-5 text-center">
+
+                            <div class="d-flex align-items-center">
+                                <form class="d-flex align-items-center" th:object="${searchReportDto}" method="get">
+                                    <input type="text"  th:field="*{reporterName}" class="form-control me-3 custom-width" placeholder="신고자 닉네임"/>
+                                    <button class="btn btn-outline-light me-3" type="submit">검색</button>
+                                </form>
+                            </div>
+
                             <h2>신고 관리</h2>
+
+                            <div class="mt-4 text-start" style="max-height: 300px; overflow-y: auto;">
+                                <div th:each="report : ${allReportList}" class="card bg-secondary mb-2">
+
+                                    <div class="card-body p-3">
+                                        <form th:action="@{/innertalk/approve/report/{id}(id=${report.id})}" method="post" onsubmit="return confirm('정말 승인하시겠습니까?');">
+                                            <button class="btn btn-sm btn-success mb-2" type="submit">회원 승인</button>
+                                        </form>
+
+                                        <form th:action="@{/innertalk/reject/report/{id}(id=${report.id})}" method="post" onsubmit="return confirm('정말 거절하시겠습니까?');">
+                                            <button class="btn btn-sm btn-danger mb-2" type="submit">회원 거절</button>
+                                        </form>
+
+                                        <h5 class="card-text mb-1" th:text="'신고 상태: ' + ${report.reportStatus}">신고 상태</h5>
+                                        <p class="card-title" th:text="'신고자 이메일: '+${report.reporterEmail}">신고자 이메일</p>
+                                        <p class="card-text mb-1" th:text="'피신고자 이메일: ' + ${report.reportedEmail}">피신고자 이메일</p>
+                                        <p class="card-text mb-1" th:text="'신고사유: ' + ${report.reason}">신고 사유</p>
+                                        <p class="card-text mb-1" th:text="'생성일: ' + ${report.createdDate}">생성일</p>
+
+                                        <form th:action="@{/innertalk/posts/{id}(id=${report.postId})}" method="get">
+                                            <button class="btn btn-sm btn-primary" type="submit">보기</button>
+                                        </form>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
                         </div>
                     </div>
                 </div>
