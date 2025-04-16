@@ -8,4 +8,4 @@
 /dataSources.local.xml
 
 #yml 파일 푸쉬 안함
-/innertalk/application-local.yml
+/src/main/resources/application-local.yml
