@@ -5,17 +5,11 @@ spring:
   application:
     name: innertalk
 
-#  datasource:
-#    url: ${DB_URL}
-#    username: ${DB_USER_NAME}
-#    password: ${DB_PASSWORD}
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://${DB_url}:${DB_port}/{DB_dataBaseName}?characterEncoding=UTF-8&serverTimezone=UTC
-    username: ${DB_name}
-    password: ${DB_password}
+    url: jdbc:mysql://localhost:3306/innertalk
+    username: crane
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
