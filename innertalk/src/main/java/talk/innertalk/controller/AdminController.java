@@ -36,15 +36,12 @@ public class AdminController {
     public String adminPage(@ModelAttribute("searchPostDto") SearchPostDto searchPostDto, @ModelAttribute("searchMemberDto") SearchMemberDto searchMemberDto,@ModelAttribute("searchReportDto") SearchReportDto searchReportDto, Model model) {
         
         //모든 게시글 조회
-        //List<PostListDto> allPostList = postService.findAll();
         List<PostListDto> allPostList = postService.findAllByCondition(searchPostDto);
 
         //모든 회원 조회
-//        List<AdminMemberListDto> allMemberList = memberService.findAllMember();
         List<AdminMemberListDto> allMemberList = memberService.findAllMemberByCondition(searchMemberDto);
 
         //모든 신고 조회
-        //List<AdminReportInfoDto> allReportList = reportService.getAdminReportInfoDtos();
         List<AdminReportInfoDto> allReportList = reportService.findAllByCondition(searchReportDto);
 
         //모델에 담기

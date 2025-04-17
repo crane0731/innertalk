@@ -88,10 +88,17 @@
 
                                         <h5 class="card-title" th:text="${post.title}">제목</h5>
                                         <p class="card-text mb-1" th:text="'생성일: ' + ${post.createdDate}">생성일</p>
-
+                                        <div>
                                         <form th:action="@{/innertalk/posts/{id}(id=${post.id})}" method="get">
                                             <button class="btn btn-sm btn-primary" type="submit">보기</button>
                                         </form>
+
+                                        <form th:action="@{/innertalk/admin/delete/posts/{id}(id=${post.id})}" method="post">
+                                            <button class="btn btn-danger btn-sm">
+                                                삭제하기
+                                            </button>
+                                        </form>
+                                        </div>
 
                                     </div>
 

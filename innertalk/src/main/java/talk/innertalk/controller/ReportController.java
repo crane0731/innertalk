@@ -44,7 +44,7 @@ public class ReportController {
 
 
     /**
-     * 신고 승인
+     * 신고 승인 - 관리자
      */
     @PostMapping("/approve/report/{reportId}")
     public String approveReport(@PathVariable("reportId") Long reportId){
@@ -57,7 +57,7 @@ public class ReportController {
 
 
     /**
-     * 신고 거절
+     * 신고 거절 - 관리자
      */
     @PostMapping("/reject/report/{reportId}")
     public String rejectReport(@PathVariable("reportId") Long reportId){

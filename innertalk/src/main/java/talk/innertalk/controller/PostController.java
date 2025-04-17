@@ -120,6 +120,16 @@ public class PostController {
     }
 
     /**
+     * 관리자-게시글 삭제
+     */
+    @PostMapping("/admin/delete/posts/{id}")
+    public String deletePostAdmin(@PathVariable("id")Long id) {
+        postService.deletePost(id);
+
+        return "redirect:/innertalk/admin";
+    }
+
+    /**
      * 댓글 삭제
      */
     @DeleteMapping("/posts/{postId}/comments/{commentId}")
