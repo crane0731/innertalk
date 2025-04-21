@@ -1,6 +1,7 @@
 # README
 
-![ChatGPT_Image_2025년_4월_17일_오후_04_14_22](https://github.com/user-attachments/assets/ab12215c-b8b0-4349-b8c2-8c5d0ea84bba)
+<img src="https://github.com/user-attachments/assets/ab12215c-b8b0-4349-b8c2-8c5d0ea84bba" width="300">
+
 
 
 ---
@@ -32,39 +33,44 @@
 
 ## 🖼️서비스 이미지
 
-### 메인 화면 - 로그인 안 함                                        메인 화면 - 관리자 로그인 시
-
-![image 1](https://github.com/user-attachments/assets/94539aa3-fff9-4a80-b7c6-7d3a68c4e195)
-
-
-### 로그인 화면
-
-![image 2](https://github.com/user-attachments/assets/6f181c83-862a-44fc-a80b-268a05a1687b)
-
-
-### 회원가입 화면
-
-![image 3](https://github.com/user-attachments/assets/8d9a0df0-a961-426f-ad32-357c100efbc6)
-
-
-![image 4](https://github.com/user-attachments/assets/42c76603-009d-4f7d-9269-9e2ae945b819)
-
-
-### 게시글 작성 화면                                                    게시글 상세 화면
-
-![image 5](https://github.com/user-attachments/assets/f00516ed-a936-4b2d-a7c3-47bd2b7dc597)
-
-
-![image 6](https://github.com/user-attachments/assets/4fe523e5-1536-48a6-9981-799eb5953a9e)
-
-
-### 관리자 페이지 화면                                               마이페이지 화면
-
-![image 7](https://github.com/user-attachments/assets/1ffaad69-68ef-4d59-8bd0-01773e55247a)
-
-![image](https://github.com/user-attachments/assets/f0e76b13-e89f-4d89-bd89-02e4d8056567)
-
-
+<table>
+  <tr>
+    <td align="center">
+      <strong>메인 화면 - 로그인 안 함</strong><br>
+      <img src="https://github.com/user-attachments/assets/94539aa3-fff9-4a80-b7c6-7d3a68c4e195" width="200">
+    </td>
+    <td align="center">
+      <strong>메인 화면 - 관리자 로그인 시</strong><br>
+      <img src="https://github.com/user-attachments/assets/f0e76b13-e89f-4d89-bd89-02e4d8056567" width="200">
+    </td>
+    <td align="center">
+      <strong>로그인 화면</strong><br>
+      <img src="https://github.com/user-attachments/assets/6f181c83-862a-44fc-a80b-268a05a1687b" width="200">
+    </td>
+    <td align="center">
+      <strong>회원가입 화면</strong><br>
+      <img src="https://github.com/user-attachments/assets/8d9a0df0-a961-426f-ad32-357c100efbc6" width="200">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>게시글 작성 화면</strong><br>
+      <img src="https://github.com/user-attachments/assets/f00516ed-a936-4b2d-a7c3-47bd2b7dc597" width="200">
+    </td>
+    <td align="center">
+      <strong>게시글 상세 화면</strong><br>
+      <img src="https://github.com/user-attachments/assets/42c76603-009d-4f7d-9269-9e2ae945b819" width="200">
+    </td>
+    <td align="center">
+      <strong>관리자 페이지 화면</strong><br>
+      <img src="https://github.com/user-attachments/assets/4fe523e5-1536-48a6-9981-799eb5953a9e" width="200">
+    </td>
+    <td align="center">
+      <strong>마이페이지 화면</strong><br>
+      <img src="https://github.com/user-attachments/assets/1ffaad69-68ef-4d59-8bd0-01773e55247a" width="200">
+    </td>
+  </tr>
+</table>
 
 ---
 
