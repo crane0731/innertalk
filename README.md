@@ -1,6 +1,7 @@
 # README
 
-![ChatGPT Image 2025년 4월 17일 오후 04_14_22.png](ChatGPT_Image_2025%EB%85%84_4%EC%9B%94_17%EC%9D%BC_%EC%98%A4%ED%9B%84_04_14_22.png)
+![ChatGPT_Image_2025년_4월_17일_오후_04_14_22](https://github.com/user-attachments/assets/ab12215c-b8b0-4349-b8c2-8c5d0ea84bba)
+
 
 ---
 
@@ -33,29 +34,37 @@
 
 ### 메인 화면 - 로그인 안 함                                        메인 화면 - 관리자 로그인 시
 
-![image.png](image.png)
+![image 1](https://github.com/user-attachments/assets/94539aa3-fff9-4a80-b7c6-7d3a68c4e195)
+
 
 ### 로그인 화면
 
-![image.png](image%201.png)
+![image 2](https://github.com/user-attachments/assets/6f181c83-862a-44fc-a80b-268a05a1687b)
+
 
 ### 회원가입 화면
 
-![image.png](image%202.png)
+![image 3](https://github.com/user-attachments/assets/8d9a0df0-a961-426f-ad32-357c100efbc6)
 
-![image.png](image%203.png)
+
+![image 4](https://github.com/user-attachments/assets/42c76603-009d-4f7d-9269-9e2ae945b819)
+
 
 ### 게시글 작성 화면                                                    게시글 상세 화면
 
-![image.png](image%204.png)
+![image 5](https://github.com/user-attachments/assets/f00516ed-a936-4b2d-a7c3-47bd2b7dc597)
 
-![image.png](image%205.png)
+
+![image 6](https://github.com/user-attachments/assets/4fe523e5-1536-48a6-9981-799eb5953a9e)
+
 
 ### 관리자 페이지 화면                                               마이페이지 화면
 
-![image.png](image%206.png)
+![image 7](https://github.com/user-attachments/assets/1ffaad69-68ef-4d59-8bd0-01773e55247a)
 
-![image.png](image%207.png)
+![image](https://github.com/user-attachments/assets/f0e76b13-e89f-4d89-bd89-02e4d8056567)
+
+
 
 ---
 
@@ -122,7 +131,8 @@
 
 ## 📄ERD
 
-![속마음.png](%EC%86%8D%EB%A7%88%EC%9D%8C.png)
+![속마음](https://github.com/user-attachments/assets/efad1433-9ddb-45ac-b6ad-8e709288e3fa)
+
 
 ---
 
