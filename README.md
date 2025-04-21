@@ -1,8 +1,6 @@
-# README
+
 
 <img src="https://github.com/user-attachments/assets/ab12215c-b8b0-4349-b8c2-8c5d0ea84bba" width="300">
-
-
 
 ---
 
