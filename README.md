@@ -29,6 +29,10 @@
 
 ---
 
+## 🌐배포주소
+- http://innertalk.duckdns.org
+- 서버가 종료되어 현재는 x
+
 ## 🖼️서비스 이미지
 
 <table>
